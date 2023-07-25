@@ -1,4 +1,5 @@
 version: 1
 GameLiftLocalPath: D:/SAE Work/Documents/GameLiftLocal-1.0.5/GameLiftLocal.jar
+GameLiftLocalPort: 8080
 WasSettingsWindowShown: 1
 ...
