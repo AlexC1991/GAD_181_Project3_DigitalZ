@@ -26,6 +26,7 @@ namespace AlexzanderCowell
         private float _normalWalkSpeed;
         private bool _walkSpeedOnly;
         private Vector3 _startingPosition;
+        [SerializeField] private Camera playerCamera;
         
 
         private void Start()
@@ -33,7 +34,6 @@ namespace AlexzanderCowell
             _startingPosition = spawnPoint.transform.position;
         _controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
-        if (Camera.main != null) _cameraTransform = Camera.main.transform;
         _gravity = -20;
         mouseSensitivityY = 0.7f;
         mouseSensitivityX = 1;
@@ -75,9 +75,8 @@ namespace AlexzanderCowell
             _mouseYposition -= mouseSensitivityY * Input.GetAxis("Mouse Y"); // grabs the mouse Y axis every frame for the rotation movement.
             _moveHorizontal = Input.GetAxis("Horizontal"); // Gets the horizontal movement of the character.
             _moveVertical = Input.GetAxis("Vertical"); // Gets the vertical movement of the character.
-
             transform.rotation = Quaternion.Euler(0f, _mouseXposition, 0f);
-            _cameraTransform.rotation = Quaternion.Euler(_mouseYposition, _mouseXposition, 0f);
+            playerCamera.transform.rotation = Quaternion.Euler(_mouseYposition, _mouseXposition, 0f);
             _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
             Vector3 movement = new Vector3(_moveHorizontal, 0f, _moveVertical); // Allows the character to move forwards and backwards & left & right.
             movement = transform.TransformDirection(movement) * walkSpeed; // Gives the character movement speed.
