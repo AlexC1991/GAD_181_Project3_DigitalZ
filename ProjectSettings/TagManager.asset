@@ -7,6 +7,7 @@ TagManager:
   - MainRoomSpawnPoint
   - ZombieLandSpawnPoint1
   - ZombieLandSpawnPoint2
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
