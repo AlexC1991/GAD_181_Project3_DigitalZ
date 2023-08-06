@@ -5,18 +5,17 @@ namespace AlexzanderCowell
 {
     public class SpawnSystem : MonoBehaviour
     {
-        [SerializeField] private GameObject spawnPoint;
+        [SerializeField] private GameObject[] spawnPoint;
+        [SerializeField] private GameObject player;
+        private GameObject randomSpawn;
         private Vector3 _startingPosition;
 
         void Start()
         {
             // GameObject spawnP = GameObject.FindWithTag("SpawnPoint");
             // spawnPoint = spawnP;
-            _startingPosition = spawnPoint.transform.position;
-            if (_startingPosition != null && PlayerMovement._controller.transform.position != null)
-            {
-                PlayerMovement._controller.transform.position = _startingPosition;
-            }
+            randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
+            Instantiate(player, randomSpawn.transform.position, Quaternion.identity);
             
         }
 
