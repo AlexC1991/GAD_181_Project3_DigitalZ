@@ -15,9 +15,11 @@ namespace AlexzanderCowell
         void Start()
         {
             spawnCharacter = true;
+            GameModeSelection._moreThanOnePlayer = false;
+            GameModeSelection._moreThanOnePlayerCheck2 = true;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (GameModeSelection._moreThanOnePlayer && !GameModeSelection._moreThanOnePlayerCheck2)
             {
