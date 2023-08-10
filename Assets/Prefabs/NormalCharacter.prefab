@@ -12262,6 +12262,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7227ad924f07e4abe12cf710041f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forwardKey1: 284
+  backwardKey1: 284
+  leftKey1: 283
+  rightKey1: 286
+  upKey1: 293
+  downKey1: 295
   mouseSensitivityY: 0
   mouseSensitivityX: 0
   walkSpeed: 5
@@ -12280,8 +12286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac30d5de7b2e674ca0ab1c66b1f4225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireRate: 15
-  _nextTimeToFire: 0
+  shootGunKey: 323
   muzzleFlash: {fileID: 8514131571677530063}
   _range: 35
   gunEnd: {fileID: 8514131571677530061}

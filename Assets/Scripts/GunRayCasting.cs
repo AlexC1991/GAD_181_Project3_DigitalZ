@@ -37,11 +37,11 @@ namespace AlexzanderCowell
 
         private void Update()
         {
-            if (GameModeSelection._moreThanOnePlayer)
+            if (GameModeSelection._moreThanOnePlayer && !GameModeSelection._moreThanOnePlayerCheck2)
             {
                 MoreThanOnePlayerControls();
             }
-            else
+            else if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
             {
                 NormalControls();
             }
@@ -68,7 +68,7 @@ namespace AlexzanderCowell
 
         private void NormalControls()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(shootGunKey))
             {
                 _isShooting = true;
             }

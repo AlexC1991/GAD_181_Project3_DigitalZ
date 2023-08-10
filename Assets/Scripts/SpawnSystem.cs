@@ -19,19 +19,14 @@ namespace AlexzanderCowell
 
         private void Update()
         {
-            if (GameModeSelection._moreThanOnePlayer)
+            if (GameModeSelection._moreThanOnePlayer && !GameModeSelection._moreThanOnePlayerCheck2)
             {
                 Character1Spawn();
-                Character2Spawn();
+            
             }
-            else
+            else if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
             {
                 NormalSpawn();
-            }
-            
-            if (PlayerMovement._controller.transform.position == _startingPosition)
-            {
-                transform.position = PlayerMovement._controller.transform.position;
             }
         }
         
@@ -42,6 +37,7 @@ namespace AlexzanderCowell
             {
                 randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
                 Instantiate(player, randomSpawn.transform.position, Quaternion.identity);
+                transform.position = PlayerMovement._controller.transform.position;
                 spawnCharacter = false;
             }
         }
@@ -52,19 +48,13 @@ namespace AlexzanderCowell
             {
                 randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
                 Instantiate(character1, randomSpawn.transform.position, Quaternion.identity);
+                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
+                Instantiate(character2, randomSpawn.transform.position, Quaternion.identity);
+                transform.position = PlayerMovement._controller.transform.position;
                 spawnCharacter = false;
             }
         }
         
-        private void Character2Spawn()
-        {
-            if (spawnCharacter)
-            {
-                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
-                Instantiate(character2, randomSpawn.transform.position, Quaternion.identity);
-                spawnCharacter = false;
-            }
-        }
         
     }
 }

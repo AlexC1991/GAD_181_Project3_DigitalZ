@@ -5,15 +5,6 @@ namespace AlexzanderCowell
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("New Player Controls")]
-        [SerializeField] private KeyCode forwardKey1;
-        [SerializeField] private KeyCode backwardKey1;
-        [SerializeField] private KeyCode leftKey1;
-        [SerializeField] private KeyCode rightKey1;
-        [SerializeField] private KeyCode upKey1;
-        [SerializeField] private KeyCode downKey1;
-        
-        
         [Header("Character Movement")] private float _mouseXposition,
             _moveHorizontal,
             _moveVertical,
@@ -43,8 +34,6 @@ namespace AlexzanderCowell
 
         private void Start()
         {
-            Debug.Log("Curser LockState " + Cursor.lockState);
-            Debug.Log("Curser Visible " + Cursor.visible);
             Cursor.lockState = CursorLockMode.None; // Lock the cursor to the center of the screen
             Cursor.visible = true;
             Time.timeScale = 0;
@@ -57,12 +46,7 @@ namespace AlexzanderCowell
 
         private void Update()
         {
-
-            if (GameModeSelection._moreThanOnePlayer)
-            {
-                TwoPlayerMovement();
-            }
-            else
+            if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
             {
                 NormalMovementController();
             }
@@ -87,6 +71,7 @@ namespace AlexzanderCowell
 
         private void NormalMovementController()
         {
+            Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
             // Get the mouse input and apply it to the camera and player and lock the camera upValue & downValue so it can only look up & down in a certain degree.
           _mouseXposition += Input.GetAxis("Mouse X") * mouseSensitivityX;
@@ -110,58 +95,6 @@ namespace AlexzanderCowell
           {
               _walkSpeedOnly = true;
           }
-        }
-
-        private void TwoPlayerMovement()
-        {
-            Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
-            // Get the mouse input and apply it to the camera and player and lock the camera upValue & downValue so it can only look up & down in a certain degree.
-            _mouseXposition += Input.GetAxis("Mouse X") * mouseSensitivityX;
-            _mouseYposition -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
-            _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
-          
-            
-            // New Player Movement Controller
-           
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                _runFaster = true;
-            }
-
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                _walkSpeedOnly = true;
-            }
-
-            if (Input.GetKeyDown(leftKey1))
-            {
-                playerCamera.transform.rotation = Quaternion.Euler(-1, 0, 0f);
-            }
-            if (Input.GetKeyDown(rightKey1))
-            {
-                playerCamera.transform.rotation = Quaternion.Euler(1, 0, 0f);
-            }
-            if (Input.GetKeyDown(upKey1))
-            {
-                playerCamera.transform.rotation = Quaternion.Euler(0, +1, 0f);
-            }
-
-            if (Input.GetKeyDown(downKey1))
-            {
-                playerCamera.transform.rotation = Quaternion.Euler(0, -1, 0f);
-                
-            }
-        
-
-            if (Input.GetKeyDown(forwardKey1))
-            {
-                _moveHorizontal = Input.GetAxis("Horizontal"); // Gets the horizontal movement of the character.
-                _moveVertical = Input.GetAxis("Vertical"); // Gets the vertical movement of the character.
-                Vector3 movement = new Vector3(_moveHorizontal, 0f, _moveVertical); // Allows the character to move forwards and backwards & left & right.
-                movement = transform.TransformDirection(movement) * walkSpeed; // Gives the character movement speed.
-                _controller.Move((movement + _moveDirection) * Time.deltaTime);
-            }
-            
         }
 
         private void ApplyGravity()
