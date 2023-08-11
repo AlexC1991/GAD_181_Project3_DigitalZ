@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace AlexzanderCowell
@@ -7,24 +6,57 @@ namespace AlexzanderCowell
     {
         [SerializeField] private GameObject[] spawnPoint;
         [SerializeField] private GameObject player;
+        [SerializeField] private GameObject character1;
+        [SerializeField] private GameObject character2;
         private GameObject randomSpawn;
         private Vector3 _startingPosition;
+        private bool spawnCharacter;
 
         void Start()
         {
-            // GameObject spawnP = GameObject.FindWithTag("SpawnPoint");
-            // spawnPoint = spawnP;
-            randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
-            Instantiate(player, randomSpawn.transform.position, Quaternion.identity);
-            
+            spawnCharacter = true;
+            GameModeSelection._moreThanOnePlayer = false;
+            GameModeSelection._moreThanOnePlayerCheck2 = true;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (PlayerMovement._controller.transform.position == _startingPosition)
+            if (GameModeSelection._moreThanOnePlayer && !GameModeSelection._moreThanOnePlayerCheck2)
             {
-                transform.position = PlayerMovement._controller.transform.position;
+                Character1Spawn();
+            
+            }
+            else if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
+            {
+                NormalSpawn();
             }
         }
+        
+        
+        private void NormalSpawn()
+        {
+            if (spawnCharacter)
+            {
+                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
+                Instantiate(player, randomSpawn.transform.position, Quaternion.identity);
+                transform.position = PlayerMovement._controller.transform.position;
+                spawnCharacter = false;
+            }
+        }
+        
+        private void Character1Spawn()
+        {
+            if (spawnCharacter)
+            {
+                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
+                Instantiate(character1, randomSpawn.transform.position, Quaternion.identity);
+                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
+                Instantiate(character2, randomSpawn.transform.position, Quaternion.identity);
+                transform.position = PlayerMovement._controller.transform.position;
+                spawnCharacter = false;
+            }
+        }
+        
+        
     }
 }

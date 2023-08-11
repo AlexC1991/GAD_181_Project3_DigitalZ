@@ -9,6 +9,7 @@ namespace AlexzanderCowell
             _moveHorizontal,
             _moveVertical,
             _mouseYposition;
+        
 
         [HideInInspector] public float mouseSensitivityY, mouseSensitivityX;
 
@@ -33,7 +34,9 @@ namespace AlexzanderCowell
 
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+            Cursor.lockState = CursorLockMode.None; // Lock the cursor to the center of the screen
+            Cursor.visible = true;
+            Time.timeScale = 0;
             _gravity = -20;
             mouseSensitivityY = 0.7f;
             mouseSensitivityX = 1;
@@ -43,18 +46,12 @@ namespace AlexzanderCowell
 
         private void Update()
         {
-            HandleMovement();
+            if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
+            {
+                NormalMovementController();
+            }
+            
             ApplyGravity();
-
-            if (Input.GetKeyDown(KeyCode.LeftShift) || (Input.GetKeyDown(KeyCode.RightShift)))
-            {
-                _runFaster = true;
-            }
-
-            if (Input.GetKeyUp(KeyCode.LeftShift) || (Input.GetKeyUp(KeyCode.RightShift)))
-            {
-                _walkSpeedOnly = true;
-            }
 
             if (_runFaster)
             {
@@ -72,8 +69,10 @@ namespace AlexzanderCowell
             // _cameraTransform.position = transform.position;
         }
 
-        private void HandleMovement()
+        private void NormalMovementController()
         {
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
             // Get the mouse input and apply it to the camera and player and lock the camera upValue & downValue so it can only look up & down in a certain degree.
           _mouseXposition += Input.GetAxis("Mouse X") * mouseSensitivityX;
           _mouseYposition -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
@@ -86,6 +85,16 @@ namespace AlexzanderCowell
           Vector3 movement = new Vector3(_moveHorizontal, 0f, _moveVertical); // Allows the character to move forwards and backwards & left & right.
           movement = transform.TransformDirection(movement) * walkSpeed; // Gives the character movement speed.
           _controller.Move((movement + _moveDirection) * Time.deltaTime); // Gets all the movement variables and moves the character.
+          
+          if (Input.GetKeyDown(KeyCode.LeftShift) || (Input.GetKeyDown(KeyCode.RightShift)))
+          {
+              _runFaster = true;
+          }
+
+          if (Input.GetKeyUp(KeyCode.LeftShift) || (Input.GetKeyUp(KeyCode.RightShift)))
+          {
+              _walkSpeedOnly = true;
+          }
         }
 
         private void ApplyGravity()

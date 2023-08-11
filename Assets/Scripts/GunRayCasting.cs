@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace AlexzanderCowell
@@ -6,11 +5,12 @@ namespace AlexzanderCowell
     
     public class GunRayCasting : MonoBehaviour
     {
+        [Header("More Than One Player Controls")]
+        
+        [SerializeField] private KeyCode shootGunKey;
 
         [Header("Gun Characteristics")] [SerializeField]
         public static float _damage = 10f;
-        [SerializeField] private float _fireRate = 15f;
-        [SerializeField] private float _nextTimeToFire = 0f;
         [SerializeField] private ParticleSystem muzzleFlash;
 
         [Header("Raycast Properties")] [SerializeField]
@@ -37,11 +37,15 @@ namespace AlexzanderCowell
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (GameModeSelection._moreThanOnePlayer && !GameModeSelection._moreThanOnePlayerCheck2)
             {
-                _isShooting = true;
+                MoreThanOnePlayerControls();
             }
-
+            else if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
+            {
+                NormalControls();
+            }
+            
             if (_isShooting)
             {
                 muzzleFlash.Play();
@@ -60,6 +64,22 @@ namespace AlexzanderCowell
 
             Debug.DrawLine(gunEnd.position, _hit.point, Color.red, 1.5f);
 
+        }
+
+        private void NormalControls()
+        {
+            if (Input.GetKeyDown(shootGunKey))
+            {
+                _isShooting = true;
+            }
+        }
+
+        private void MoreThanOnePlayerControls()
+        {
+            if (Input.GetKeyDown(shootGunKey))
+            {
+                _isShooting = true;
+            }
         }
 
         private void ShootGun()
