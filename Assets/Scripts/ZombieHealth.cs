@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace AlexzanderCowell
@@ -6,7 +5,7 @@ namespace AlexzanderCowell
     public class ZombieHealth : MonoBehaviour
     {
 
-        [SerializeField] private float _health = 50f;
+        [SerializeField] public static float _health = 50f;
         private bool _isDead;
         private Animator _animator;
         private bool takeDamage;
@@ -18,6 +17,7 @@ namespace AlexzanderCowell
             _animator.SetBool("isDead", false);
             takeDamage = false;
         }
+        
 
         private void Update()
         {

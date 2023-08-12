@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.65898067, g: 0.3004219, b: 0.354057, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -553,9 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiePrefab:
-  - {fileID: 5983196387794217670, guid: 5a924afbfa0e55b459845e38040a1f6d, type: 3}
-  - {fileID: 6314357351441643149, guid: b51f7e85ee47fef4cb67ec1635f78e82, type: 3}
-  - {fileID: 7734079054491916167, guid: 8b6cb6e2a6823084293c69c605cc3b48, type: 3}
+  - {fileID: 935392647599106209, guid: a2aaaa04b53b2e94a8eae41d3421c5bb, type: 3}
   spawnRadius: 3
   spawnPoints:
   - {fileID: 4284507}
@@ -610,8 +608,10 @@ MonoBehaviour:
   - {fileID: 799440922}
   - {fileID: 1538892184}
   player: {fileID: 8514131571046947512, guid: 0bad511778b3bb343b8dba7ac19a4acb, type: 3}
-  character1: {fileID: 0}
-  character2: {fileID: 0}
+  character1: {fileID: 1528301939793800692, guid: 8b383ddc1bcff85419fcdee93414ea25,
+    type: 3}
+  character2: {fileID: 7760870068492443323, guid: d01f61a850ca86d44a55f6b90e498bea,
+    type: 3}
 --- !u!1 &404383332
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476831022}
   m_LocalRotation: {x: -0, y: -0.35102466, z: -0, w: 0.93636626}
-  m_LocalPosition: {x: 86.3, y: -123.1, z: 5.8}
+  m_LocalPosition: {x: 86.3, y: -164.2, z: 5.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -907,7 +907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799440922}
   m_LocalRotation: {x: -0, y: -0.35102466, z: -0, w: 0.93636626}
-  m_LocalPosition: {x: -169.93, y: -50.3, z: -217.69}
+  m_LocalPosition: {x: -169.93, y: -169.69, z: -217.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1216,7 +1216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538892184}
   m_LocalRotation: {x: -0, y: -0.35102466, z: -0, w: 0.93636626}
-  m_LocalPosition: {x: 124.043396, y: -86, z: -237.20346}
+  m_LocalPosition: {x: 124.043396, y: -181.05, z: -237.20346}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

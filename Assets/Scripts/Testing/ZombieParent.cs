@@ -2,19 +2,15 @@ using UnityEngine;
 
 namespace AlexzanderCowell
 {
-    
     public class ZombieParent : MonoBehaviour
     {
-        public bool IsVisibleInCameraFrustum { get; private set; }
+        public static string zombieName;
+        
+        private Renderer _mRenderer;
 
-        private void OnBecameVisible()
+        /*private void Start()
         {
-            IsVisibleInCameraFrustum = true;
-        }
-
-        private void OnBecameInvisible()
-        {
-            IsVisibleInCameraFrustum = false;
-        }
+            _mRenderer = GetComponent<Renderer>();
+        }*/
     }
 }
