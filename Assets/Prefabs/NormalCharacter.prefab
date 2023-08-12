@@ -8312,8 +8312,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.21
-  far clip plane: 350
-  field of view: 59
+  far clip plane: 100
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -12193,6 +12193,7 @@ GameObject:
   - component: {fileID: 8514131571046947515}
   - component: {fileID: 8514131571046947517}
   - component: {fileID: 8514131571046947518}
+  - component: {fileID: -5482382351772893585}
   m_Layer: 3
   m_Name: NormalCharacter
   m_TagString: Player
@@ -12262,12 +12263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7227ad924f07e4abe12cf710041f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardKey1: 284
-  backwardKey1: 284
-  leftKey1: 283
-  rightKey1: 286
-  upKey1: 293
-  downKey1: 295
   mouseSensitivityY: 0
   mouseSensitivityX: 0
   walkSpeed: 5
@@ -12290,6 +12285,19 @@ MonoBehaviour:
   muzzleFlash: {fileID: 8514131571677530063}
   _range: 35
   gunEnd: {fileID: 8514131571677530061}
+--- !u!114 &-5482382351772893585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8514131571046947512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152a2543e30a1624dbbe05e20054f58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invisibleZombies: []
 --- !u!1 &8514131571677530060
 GameObject:
   m_ObjectHideFlags: 0

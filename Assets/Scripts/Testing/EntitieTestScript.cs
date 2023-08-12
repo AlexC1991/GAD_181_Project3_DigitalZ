@@ -20,7 +20,7 @@ namespace AlexzanderCowell
                 typeof(RenderMesh),
                 typeof(LocalToWorld)
                 );
-            NativeArray<Entity> _entitieArray = new NativeArray<Entity>(200, Allocator.Temp);
+            NativeArray<Entity> _entitieArray = new NativeArray<Entity>(1, Allocator.Temp);
             _entityManager.CreateEntity(entityArchetype, _entitieArray);
             
             for (int i = 0; i < _entitieArray.Length; i++)

@@ -80,13 +80,17 @@ namespace AlexzanderCowell
 
         private void OnDrawGizmosSelected()
         {
-            // creates a on draw gizmo to show the path the zombie is taking and the radius of the zombie's vision.
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, visionRadius);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, chaseRadius);
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, attackRadius);
+            if (_agent == enabled)
+            {
+                // creates a on draw gizmo to show the path the zombie is taking and the radius of the zombie's vision.
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(transform.position, visionRadius);
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(transform.position, chaseRadius);
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(transform.position, attackRadius);
+            }
+            
         }
     }
     

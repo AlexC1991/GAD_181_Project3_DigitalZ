@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace AlexzanderCowell
 {
     public class SpawnSystem : MonoBehaviour
@@ -12,7 +11,7 @@ namespace AlexzanderCowell
         private Vector3 _startingPosition;
         private bool spawnCharacter;
 
-        void Start()
+        private void Start()
         {
             spawnCharacter = true;
             GameModeSelection._moreThanOnePlayer = false;
@@ -23,11 +22,12 @@ namespace AlexzanderCowell
         {
             if (GameModeSelection._moreThanOnePlayer && !GameModeSelection._moreThanOnePlayerCheck2)
             {
+                randomSpawn = spawnPoint[Random.Range(0, spawnPoint.Length)];
                 Character1Spawn();
-            
             }
             else if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
             {
+                randomSpawn = spawnPoint[Random.Range(0, spawnPoint.Length)];
                 NormalSpawn();
             }
         }
@@ -37,9 +37,8 @@ namespace AlexzanderCowell
         {
             if (spawnCharacter)
             {
-                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
                 Instantiate(player, randomSpawn.transform.position, Quaternion.identity);
-                transform.position = PlayerMovement._controller.transform.position;
+                /*transform.position = PlayerMovement._controller.transform.position;*/
                 spawnCharacter = false;
             }
         }
@@ -48,11 +47,10 @@ namespace AlexzanderCowell
         {
             if (spawnCharacter)
             {
-                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
+                
                 Instantiate(character1, randomSpawn.transform.position, Quaternion.identity);
-                randomSpawn = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
                 Instantiate(character2, randomSpawn.transform.position, Quaternion.identity);
-                transform.position = PlayerMovement._controller.transform.position;
+                /*transform.position = PlayerMovement._controller.transform.position;*/
                 spawnCharacter = false;
             }
         }
