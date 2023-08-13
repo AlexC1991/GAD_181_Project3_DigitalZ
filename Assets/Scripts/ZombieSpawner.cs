@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace AlexzanderCowell
 {
@@ -19,6 +19,7 @@ namespace AlexzanderCowell
         [SerializeField] int _maxZombies = 150;
         [SerializeField] private GameObject zombieContainer;
         public static bool spawnedAZombie;
+        [SerializeField] private int _zombieChildNumber;
 
         private void Start()
         {
@@ -45,9 +46,10 @@ namespace AlexzanderCowell
                 _zombie = Instantiate(zombiePrefab[randomZombie], _spawnPosition, Quaternion.identity);
                 // Sets a random zombie name to the zombie
                 _zombie.name = "Zombie" + _zombieNumber;
-                _zombie.transform.GetChild(0).name = "ZombieChild" + _zombieNumber;
+                _zombie.transform.GetChild(0).name = "ZombieChild" + _zombieChildNumber;
                 _zombie.transform.parent = zombieContainer.transform;
-                _zombieNumber += 1;
+                _zombieNumber = Random.Range(1,9999999);
+                _zombieChildNumber = Random.Range(1,9999999);
                 _zombieCount += 1;
                 spawnedAZombie = true;
                 timer = timerValue;

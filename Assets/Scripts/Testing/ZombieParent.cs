@@ -1,16 +1,14 @@
+using System;
 using UnityEngine;
 
 namespace AlexzanderCowell
 {
     public class ZombieParent : MonoBehaviour
     {
-        public static string zombieName;
-        
-        private Renderer _mRenderer;
-
-        /*private void Start()
+        private void Update()
         {
-            _mRenderer = GetComponent<Renderer>();
-        }*/
+            if (transform.childCount < 1)
+                Destroy(gameObject);
+        }
     }
 }
