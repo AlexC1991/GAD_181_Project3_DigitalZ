@@ -76,8 +76,8 @@ namespace AlexzanderCowell
           _mouseYposition -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
           _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
           
-          _mouseXposition += Input.GetAxis(_playerOneXboxMouseX1) * mouseSensitivityX;
-          _mouseYposition -= Input.GetAxis(_playerOneXboxMouseY1) * mouseSensitivityY;
+          _mouseXposition += Input.GetAxis(_playerOneXboxMouseY1) * mouseSensitivityX;
+          _mouseYposition += Input.GetAxis(_playerOneXboxMouseX1) * mouseSensitivityY;
           _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
           
           _moveHorizontal = Input.GetAxis("Horizontal"); // Gets the horizontal movement of the character.

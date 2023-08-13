@@ -10312,8 +10312,8 @@ MonoBehaviour:
   mouseSensitivityY: 0
   mouseSensitivityX: 0
   walkSpeed: 4
-  downValue: -50
-  upValue: 50
+  downValue: -70
+  upValue: 60
   playerCamera: {fileID: 5633962414844836630}
 --- !u!114 &5821925219403856785
 MonoBehaviour:

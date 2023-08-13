@@ -12266,8 +12266,8 @@ MonoBehaviour:
   mouseSensitivityY: 0
   mouseSensitivityX: 0
   walkSpeed: 5
-  downValue: -40
-  upValue: 20
+  downValue: -70
+  upValue: 60
   playerCamera: {fileID: 6031368078523072277}
 --- !u!114 &8514131571046947518
 MonoBehaviour:
@@ -12297,7 +12297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152a2543e30a1624dbbe05e20054f58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invisibleZombies: []
+  activeZombies: []
 --- !u!1 &8514131571677530060
 GameObject:
   m_ObjectHideFlags: 0

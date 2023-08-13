@@ -62,9 +62,17 @@ namespace AlexzanderCowell
 
         private void NormalControls()
         {
-            if (Input.GetKeyDown(shootGunKey) || Input.GetButtonDown(xboxShootGunKey))
+            if (Input.GetKeyDown(shootGunKey))
             {
                 _isShooting = true;
+            }
+            if (Input.GetAxis(xboxShootGunKey) > 0)
+            {
+                _isShooting = true;
+            }
+            else if (Input.GetAxis(xboxShootGunKey) < 0.2)
+            {
+                _isShooting = false;
             }
         }
 
