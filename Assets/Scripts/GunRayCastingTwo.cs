@@ -3,12 +3,12 @@ using UnityEngine;
 namespace AlexzanderCowell
 {
     
-    public class GunRayCasting : MonoBehaviour
+    public class GunRayCastingTwo : MonoBehaviour
     {
         [Header("More Than One Player Controls")]
         
         [SerializeField] private KeyCode shootGunKey;
-        private string xboxShootGunKey = "XboxFireC1";
+        private string xboxShootGunKey = "XboxFireC2";
 
         [Header("Gun Characteristics")] [SerializeField]
         public static float _damage = 10f;

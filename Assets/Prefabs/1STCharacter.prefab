@@ -2988,8 +2988,9 @@ GameObject:
   - component: {fileID: 1528301939793800693}
   - component: {fileID: 1528301939793800688}
   - component: {fileID: 1528301939793800695}
-  - component: {fileID: 1528301939793800689}
   - component: {fileID: 1528301939793800690}
+  - component: {fileID: 7358760925127636560}
+  - component: {fileID: 1214140605930905075}
   m_Layer: 3
   m_Name: 1STCharacter
   m_TagString: Player
@@ -3047,30 +3048,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0.04, y: 0.75, z: 0.09}
---- !u!114 &1528301939793800689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528301939793800692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb7227ad924f07e4abe12cf710041f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardKey1: 119
-  backwardKey1: 115
-  leftKey1: 97
-  rightKey1: 100
-  upKey1: 114
-  downKey1: 102
-  mouseSensitivityY: 0
-  mouseSensitivityX: 0
-  walkSpeed: 5
-  downValue: -40
-  upValue: 20
-  playerCamera: {fileID: 3507849213968730201}
 --- !u!114 &1528301939793800690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3087,6 +3064,37 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1528301940432515203}
   _range: 35
   gunEnd: {fileID: 1528301940432515201}
+--- !u!114 &7358760925127636560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528301939793800692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22b3b8e12d66094799635a76b9f2345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivityY: 0
+  mouseSensitivityX: 0
+  walkSpeed: 4
+  downValue: -50
+  upValue: 50
+  _playerCamera: {fileID: 3507849213968730201}
+--- !u!114 &1214140605930905075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528301939793800692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152a2543e30a1624dbbe05e20054f58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeZombies: []
 --- !u!1 &1528301940432515200
 GameObject:
   m_ObjectHideFlags: 0

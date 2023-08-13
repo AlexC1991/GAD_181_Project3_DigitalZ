@@ -1,28 +1,50 @@
-using System;
+using AlexzanderCowell;
 using UnityEngine;
 
 public class GameModeSelection : MonoBehaviour
 {
-    public static bool _moreThanOnePlayer;
-    public static bool _moreThanOnePlayerCheck2; 
     [SerializeField] private GameObject playerChoice;
 
     private void Start()
     {
         playerChoice.SetActive(true);
+        Time.timeScale = 0f;
     }
     
-    public void OnlyOnePlayer()
+    public void OnePlayer()
     {
-        _moreThanOnePlayer = false;
-        _moreThanOnePlayerCheck2 = true;
+        TwoPlayerScriptableObject.isTwoPlayerMode = false;
+        TwoPlayerScriptableObject.additionalCheck = true;
+    }
+    
+    public void TwoPlayer()
+    {
+        TwoPlayerScriptableObject.isTwoPlayerMode = true;
+        TwoPlayerScriptableObject.additionalCheck = false;
+    }
+
+
+    private void Update()
+    {
+        if (TwoPlayerScriptableObject.isTwoPlayerMode && !TwoPlayerScriptableObject.additionalCheck)
+        {
+            TwoPlayersPlaying();
+        }
+        else if (!TwoPlayerScriptableObject.isTwoPlayerMode && TwoPlayerScriptableObject.additionalCheck)
+        {
+            OnlyOnePlayer();
+        }
+    }
+
+    private void OnlyOnePlayer()
+    {
+        Time.timeScale = 1;
         playerChoice.SetActive(false);
     }
 
-    public void TwoPlayersPlaying()
+    private void TwoPlayersPlaying()
     {
-        _moreThanOnePlayer = true;
-        _moreThanOnePlayerCheck2 = false; 
+        Time.timeScale = 1;
         playerChoice.SetActive(false);
     }
 }

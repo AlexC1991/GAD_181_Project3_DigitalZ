@@ -10237,8 +10237,9 @@ GameObject:
   - component: {fileID: 7760870068492443322}
   - component: {fileID: 7760870068492443327}
   - component: {fileID: 7760870068492443320}
-  - component: {fileID: 7760870068492443326}
-  - component: {fileID: 7760870068492443325}
+  - component: {fileID: 5641207967867112800}
+  - component: {fileID: 5821925219403856785}
+  - component: {fileID: 2946860111846033136}
   m_Layer: 3
   m_Name: 2ndCharacter
   m_TagString: Player
@@ -10296,7 +10297,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0.04, y: 0.75, z: 0.09}
---- !u!114 &7760870068492443326
+--- !u!114 &5641207967867112800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10305,22 +10306,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7760870068492443323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb7227ad924f07e4abe12cf710041f08, type: 3}
+  m_Script: {fileID: 11500000, guid: 9694da5e5a6c8d24a998741c5b6f10d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardKey1: 273
-  backwardKey1: 274
-  leftKey1: 276
-  rightKey1: 275
-  upKey1: 56
-  downKey1: 50
   mouseSensitivityY: 0
   mouseSensitivityX: 0
-  walkSpeed: 5
-  downValue: -40
-  upValue: 20
+  walkSpeed: 4
+  downValue: -50
+  upValue: 50
   playerCamera: {fileID: 5633962414844836630}
---- !u!114 &7760870068492443325
+--- !u!114 &5821925219403856785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10329,7 +10324,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7760870068492443323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ac30d5de7b2e674ca0ab1c66b1f4225, type: 3}
+  m_Script: {fileID: 11500000, guid: 152a2543e30a1624dbbe05e20054f58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeZombies: []
+--- !u!114 &2946860111846033136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7760870068492443323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 904ef96caf451e64986067086bd3cc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootGunKey: 323

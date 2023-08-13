@@ -14,18 +14,16 @@ namespace AlexzanderCowell
         private void Start()
         {
             spawnCharacter = true;
-            GameModeSelection._moreThanOnePlayer = false;
-            GameModeSelection._moreThanOnePlayerCheck2 = true;
         }
 
         private void FixedUpdate()
         {
-            if (GameModeSelection._moreThanOnePlayer && !GameModeSelection._moreThanOnePlayerCheck2)
+            if (TwoPlayerScriptableObject.isTwoPlayerMode && !TwoPlayerScriptableObject.additionalCheck)
             {
                 randomSpawn = spawnPoint[Random.Range(0, spawnPoint.Length)];
                 Character1Spawn();
             }
-            else if (!GameModeSelection._moreThanOnePlayer && GameModeSelection._moreThanOnePlayerCheck2)
+            else if (!TwoPlayerScriptableObject.isTwoPlayerMode && TwoPlayerScriptableObject.additionalCheck)
             {
                 randomSpawn = spawnPoint[Random.Range(0, spawnPoint.Length)];
                 NormalSpawn();
