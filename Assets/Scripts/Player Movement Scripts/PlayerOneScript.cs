@@ -33,7 +33,8 @@ namespace AlexzanderCowell
         private float _normalWalkSpeed;
         private bool _walkSpeedOnly;
        [SerializeField] private Camera _playerCamera;
-        //[FormerlySerializedAs("_animator")] [Header("Character Animations")] [SerializeField]
+        private bool switchInputs;
+       //[FormerlySerializedAs("_animator")] [Header("Character Animations")] [SerializeField]
         //private Animator animator;
 
         private void Awake()
@@ -52,9 +53,13 @@ namespace AlexzanderCowell
             _runFaster = false;
         }
 
+        private void FixedUpdate()
+        {
+            NormalMovementController();
+        }
+
         private void Update()
         {
-                NormalMovementController();
             ApplyGravity();
 
             if (_runFaster)
@@ -76,37 +81,51 @@ namespace AlexzanderCowell
         private void NormalMovementController()
         {
             Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
-            // Get the mouse input and apply it to the camera and player and lock the camera upValue & downValue so it can only look up & down in a certain degree.
-          _mouseXposition += Input.GetAxis(_playerOneMouseX) * mouseSensitivityX;
-          _mouseYposition -= Input.GetAxis(_playerOneMouseY) * mouseSensitivityY;
-          _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
-          
-          _mouseXposition += Input.GetAxis(_playerOneXboxMouseY1) * mouseSensitivityX;
-          _mouseYposition += Input.GetAxis(_playerOneXboxMouseX1) * mouseSensitivityY;
-          _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
-          
-          _moveHorizontal = Input.GetAxis(_playerOneHorizontal); // Gets the horizontal movement of the character.
-          _moveVertical = Input.GetAxis(_playerOneVertical); // Gets the vertical movement of the character.
-          _moveHorizontal = Input.GetAxis(_playerOneXboxHorizontal); // Gets the horizontal movement of the character.
-          _moveVertical = Input.GetAxis(_playerOneXboxVertical); // Gets the vertical movement of the character.
-         
-          
-          transform.rotation = Quaternion.Euler(_mouseYposition, _mouseXposition, 0f);
-          _playerCamera.transform.rotation = Quaternion.Euler(_mouseYposition, _mouseXposition, 0f);
-          
-          Vector3 movement = new Vector3(_moveHorizontal, 0f, _moveVertical); // Allows the character to move forwards and backwards & left & right.
-          movement = transform.TransformDirection(movement) * walkSpeed; // Gives the character movement speed.
-          _controller.Move((movement + _moveDirection) * Time.deltaTime); // Gets all the movement variables and moves the character.
-          
-          if (Input.GetKeyDown(KeyCode.LeftShift))
-          {
-              _runFaster = true;
-          }
+            
+            if (Input.GetAxis(_playerOneMouseX) >= 0.5f || Input.GetAxis(_playerOneMouseY) >= 0.5f || Input.GetAxis(_playerOneMouseX) <= -0.5f ||
+                Input.GetAxis(_playerOneMouseY) <= -0.5f)
+            {
+                switchInputs = true;
+            }
+            else if (Input.GetAxis(_playerOneXboxMouseX1) <= -0.5f || Input.GetAxis(_playerOneXboxMouseY1) <= -0.5f ||
+                     Input.GetAxis(_playerOneXboxHorizontal) <= -0.5f || Input.GetAxis(_playerOneXboxVertical) <= -0.5f ||
+                     Input.GetAxis(_playerOneXboxMouseX1) >= 0.5f || Input.GetAxis(_playerOneXboxMouseY1) >= 0.5f ||
+                     Input.GetAxis(_playerOneXboxHorizontal) >= 0.5f || Input.GetAxis(_playerOneXboxVertical) >= 0.5f )
+            {
+                switchInputs = false;
+            }
 
-          if (Input.GetKeyUp(KeyCode.LeftShift))
-          {
-              _walkSpeedOnly = true;
-          }
+            if (switchInputs)
+            {
+                _mouseXposition += Input.GetAxis(_playerOneMouseX) * mouseSensitivityX;
+                _mouseYposition -= Input.GetAxis(_playerOneMouseY) * mouseSensitivityY;
+                _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
+                _moveHorizontal = Input.GetAxis(_playerOneHorizontal); // Gets the horizontal movement of the character.
+                _moveVertical = Input.GetAxis(_playerOneVertical); // Gets the vertical movement of the character.
+            }
+            else if (!switchInputs)
+            {
+                if (Input.GetAxis(_playerOneXboxMouseX1) <= -0.1f || Input.GetAxis(_playerOneXboxMouseY1) <= -0.1f ||
+                    Input.GetAxis(_playerOneXboxMouseX1) >= 0.1f || Input.GetAxis(_playerOneXboxMouseY1) >= 0.1f)
+                {
+                    _mouseXposition += Input.GetAxis(_playerOneXboxMouseY1) * mouseSensitivityX;
+                    _mouseYposition += Input.GetAxis(_playerOneXboxMouseX1) * mouseSensitivityY;
+                    _mouseYposition = Mathf.Clamp(_mouseYposition, downValue, upValue);
+                }
+                
+                _moveHorizontal = Input.GetAxis(_playerOneXboxHorizontal); // Gets the horizontal movement of the character.
+                _moveVertical = Input.GetAxis(_playerOneXboxVertical); // Gets the vertical movement of the character.
+            }
+          
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Joystick1Button8))
+            {
+                _runFaster = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.Joystick1Button8))
+            {
+                _walkSpeedOnly = true;
+            }
         }
 
         private void ApplyGravity()

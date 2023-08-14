@@ -1,4 +1,9 @@
 {
+  "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-2078044307-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-2078044307-0",
+    "AssetGUID": "cda1a1f7fd7428245a9ae6bea1d0ae3b",
+    "UniqueItemID": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-2078044307-0"
+  },
   "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-919132149155446097-756446573": {
     "GameObjectId": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-919132149155446097-756446573",
     "AssetGUID": "cda1a1f7fd7428245a9ae6bea1d0ae3b",
@@ -9,15 +14,15 @@
     "AssetGUID": "cda1a1f7fd7428245a9ae6bea1d0ae3b",
     "UniqueItemID": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-3762901004173259845-323023321"
   },
-  "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-3762901004173259845-1189483686": {
-    "GameObjectId": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-3762901004173259845-1189483686",
-    "AssetGUID": "cda1a1f7fd7428245a9ae6bea1d0ae3b",
-    "UniqueItemID": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-3762901004173259845-1189483686"
-  },
   "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-919132149155446097-1252367591": {
     "GameObjectId": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-919132149155446097-1252367591",
     "AssetGUID": "cda1a1f7fd7428245a9ae6bea1d0ae3b",
     "UniqueItemID": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-919132149155446097-1252367591"
+  },
+  "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-3762901004173259845-1189483686": {
+    "GameObjectId": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-3762901004173259845-1189483686",
+    "AssetGUID": "cda1a1f7fd7428245a9ae6bea1d0ae3b",
+    "UniqueItemID": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-3762901004173259845-1189483686"
   },
   "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-7174742950646814116-1694953213": {
     "GameObjectId": "GlobalObjectId_V1-2-cda1a1f7fd7428245a9ae6bea1d0ae3b-7174742950646814116-1694953213",
