@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.65898067, g: 0.3004219, b: 0.354057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -491,6 +491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 377505760}
+  - component: {fileID: 377505761}
   m_Layer: 0
   m_Name: Sound Manager
   m_TagString: Untagged
@@ -517,6 +518,39 @@ Transform:
   m_Father: {fileID: 381446872}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377505761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377505759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75b6125b5f93e046b8d7ab8b71ab999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSounds: {fileID: 418421382}
+  gunSounds: {fileID: 818126676}
+  zombieSounds: {fileID: 531277629}
+  backgroundMusic: {fileID: 1111066855}
+  playerWalkingSounds:
+  - {fileID: 8300000, guid: 59e59748afb4b9f4aa9df8cb48af569c, type: 3}
+  - {fileID: 8300000, guid: 71d9c5e7b2dcc204084389ed3ea2d94a, type: 3}
+  playerRunningSounds:
+  - {fileID: 8300000, guid: de80caeb60902ce4db4261e4cd8df2a4, type: 3}
+  - {fileID: 8300000, guid: accf821eb208d9442a89b3433f60d682, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: 608710c4c4e4edb438bc79acaac53fad, type: 3}
+  gunShotSound: {fileID: 8300000, guid: 5c5d73c86ee4d504a9fceb3e7c74726c, type: 3}
+  gunReloadSound: {fileID: 8300000, guid: fdbfc0003f7146e4abbe76fdb7259126, type: 3}
+  zombieAmbienceSounds:
+  - {fileID: 8300000, guid: 384c7d7eb14800b4b8d7eff54d83257a, type: 3}
+  - {fileID: 8300000, guid: e1e05e64584cce54eac46635db672b4b, type: 3}
+  zombieDeathSound: {fileID: 8300000, guid: 52aad3ca5494de24d8c712d8b92a4544, type: 3}
+  zombieAlertSound: {fileID: 8300000, guid: c571a6328c46a2149b750af26a706d00, type: 3}
+  menuMusic: {fileID: 8300000, guid: b333ff1be51d59743be6d856f416e228, type: 3}
+  gameMusic: {fileID: 8300000, guid: 50af21f0ca6c75249b7232349fdfdeca, type: 3}
+  loadSound: {fileID: 0}
 --- !u!1 &381446870
 GameObject:
   m_ObjectHideFlags: 0

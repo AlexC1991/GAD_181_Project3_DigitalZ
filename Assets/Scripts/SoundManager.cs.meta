@@ -3,7 +3,19 @@ guid: a75b6125b5f93e046b8d7ab8b71ab999
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerSounds: {instanceID: 0}
+  - gunSounds: {instanceID: 0}
+  - zombieSounds: {instanceID: 0}
+  - backgroundMusic: {instanceID: 0}
+  - playerDeathSound: {fileID: 8300000, guid: 608710c4c4e4edb438bc79acaac53fad, type: 3}
+  - gunShotSound: {fileID: 8300000, guid: 5c5d73c86ee4d504a9fceb3e7c74726c, type: 3}
+  - gunReloadSound: {fileID: 8300000, guid: fdbfc0003f7146e4abbe76fdb7259126, type: 3}
+  - zombieDeathSound: {fileID: 8300000, guid: 52aad3ca5494de24d8c712d8b92a4544, type: 3}
+  - zombieAlertSound: {fileID: 8300000, guid: c571a6328c46a2149b750af26a706d00, type: 3}
+  - menuMusic: {fileID: 8300000, guid: b333ff1be51d59743be6d856f416e228, type: 3}
+  - gameMusic: {fileID: 8300000, guid: 50af21f0ca6c75249b7232349fdfdeca, type: 3}
+  - loadSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
