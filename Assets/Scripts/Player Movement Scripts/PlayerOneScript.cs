@@ -29,7 +29,7 @@ namespace AlexzanderCowell
         [SerializeField] private float downValue, upValue;
         private Transform _cameraTransform;
         private float _gravity;
-        private bool _runFaster;
+        [SerializeField] public static bool _runFaster;
         private float _normalWalkSpeed;
         private bool _walkSpeedOnly;
        [SerializeField] private Camera _playerCamera;

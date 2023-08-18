@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.65898025, g: 0.30042168, b: 0.35405675, a: 1}
+  m_IndirectSpecularColor: {r: 0.65898067, g: 0.3004219, b: 0.354057, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -530,10 +530,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75b6125b5f93e046b8d7ab8b71ab999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSounds: {fileID: 418421382}
-  gunSounds: {fileID: 818126676}
-  zombieSounds: {fileID: 531277629}
-  backgroundMusic: {fileID: 1111066855}
+  playerSounds: {fileID: 0}
+  gunSounds: {fileID: 0}
+  zombieSounds: {fileID: 0}
+  backgroundMusic: {fileID: 0}
   playerWalkingSounds:
   - {fileID: 8300000, guid: 59e59748afb4b9f4aa9df8cb48af569c, type: 3}
   - {fileID: 8300000, guid: 71d9c5e7b2dcc204084389ed3ea2d94a, type: 3}

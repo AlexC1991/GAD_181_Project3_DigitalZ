@@ -1,124 +1,157 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-public class SoundManager : MonoBehaviour
+namespace AlexzanderCowell
 {
-    public AudioSource playerSounds;
-    public AudioSource gunSounds;
-    public AudioSource zombieSounds;
-    public AudioSource backgroundMusic;
-
-    public AudioClip[] playerWalkingSounds;
-    public AudioClip[] playerRunningSounds;
-    public AudioClip playerDeathSound; //played upon players health reaching 0.
-
-    public AudioClip gunShotSound;
-    public AudioClip gunReloadSound; //played after gunshot sound.
-
-    public AudioClip[] zombieAmbienceSounds; //starts at radius 13, increase in volume till loudest at 1.
-    public AudioClip zombieDeathSound; //upon zombie health reaching 0. 
-    public AudioClip zombieAlertSound; //starts at radius 3.
-
-    public AudioClip menuMusic; //played after a brief delay on menu screen.
-    public AudioClip gameMusic; //played after a brief delay upon entering map/scene.
-    public AudioClip loadSound; //played on teleport loads. (If included).
-
-    private Transform _controller;
-
-    void Start()
+    public class SoundManager : MonoBehaviour
     {
-        StartCoroutine(PlayDelayedGameMusic());
-    }
+        private AudioSource playerSounds;
+        private AudioSource gunSounds;
+        private AudioSource zombieSounds;
 
-    IEnumerator PlayDelayedGameMusic()
-    {
-        yield return new WaitForSeconds(0.1f);
-        PlayGameMusic();
-    }
+        private AudioClip[] playerWalkingSounds;
+        private AudioClip[] playerRunningSounds;
+        private AudioClip playerDeathSound; //played upon players health reaching 0.
 
-    public void PlayGameMusic()
-    {
-        backgroundMusic.clip = gameMusic;
-        backgroundMusic.Play();
-    }
+        private AudioClip gunShotSound;
+        private AudioClip gunReloadSound; //played after gunshot sound.
 
+        private AudioClip[] zombieAmbienceSounds; //starts at radius 13, increase in volume till loudest at 1.
+        private AudioClip zombieDeathSound; //upon zombie health reaching 0. 
+        private AudioClip zombieAlertSound; //starts at radius 3.
 
-    public void PlayZombieAmbienceSound(Vector3 enemyPosition)
-    {
-        float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
-        float maxAudibleDistance = 13f;
-        float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
+        private AudioSource gameMusic; //plays game music.
+        private float delayInSeconds = 0.5f; //initiates delay. Intended for use with gameMusic.
 
-        if (zombieAmbienceSounds.Length > 0)
+        private Transform _controller;
+        public static SoundManager instance;
+
+        private void Awake()
         {
-            AudioClip clip = zombieAmbienceSounds[Random.Range(0, zombieAmbienceSounds.Length)];
-            zombieSounds.PlayOneShot(clip, volumeFactor);
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
         }
-    }
 
-    public void PlayZombieAlert(Vector3 enemyPosition)
-    {
-        float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
-        float maxAudibleDistance = 3f;
-        float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
-
-        if (zombieAlertSound != null)
+        void Start()
         {
-            zombieSounds.PlayOneShot(zombieAlertSound, volumeFactor);
+            gameMusic = GetComponent<AudioSource>();
+            Invoke("PlayMusic", delayInSeconds);
         }
-    }
 
-    public void HandlePlayerMovement(bool isRunning)
-    {
-        if (isRunning)
+        void PlayMusic()
         {
-            PlayPlayerRunningSounds();
+            gameMusic.Play();
         }
-        else
+
+        public void PlayZombieAmbienceSound(Vector3 enemyPosition)
         {
-            PlayPlayerWalkingSounds();
-        }
-    }
+            float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
+            float maxAudibleDistance = 13f;
+            float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
 
-    public void PlayPlayerRunningSounds()
-    {
-        if (playerRunningSounds.Length > 0)
+            if (ZombieAIScript.visionRadius)
+            {
+                AudioClip clip = zombieAmbienceSounds[Random.Range(0, zombieAmbienceSounds.Length)];
+                zombieSounds.PlayOneShot(clip, volumeFactor);
+            }
+        }
+
+        public void PlayZombieAlert(Vector3 enemyPosition)
         {
-            AudioClip clip = playerRunningSounds[Random.Range(0, playerRunningSounds.Length)];
-            playerSounds.PlayOneShot(clip);
-        }
-    }
+            float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
+            float maxAudibleDistance = 3f;
+            float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
 
-    public void PlayPlayerWalkingSounds()
-    {
-        if (playerWalkingSounds.Length > 0)
+            if (ZombieAIScript.attackRadius)
+            {
+                zombieSounds.PlayOneShot(zombieAlertSound, volumeFactor);
+            }
+        }
+
+        public void PlayZombieDeathSound()
         {
-            AudioClip clip = playerWalkingSounds[Random.Range(0, playerWalkingSounds.Length)];
-            playerSounds.PlayOneShot(clip);
+            if (ZombieHealth._isDead)
+            {
+                zombieSounds.PlayOneShot(zombieDeathSound);
+            }
         }
-    }
 
-    //public void HandlePlayerDeath()
-    //{
-    //    PlayPlayerDeathSound();
-    //}
+        public void HandlePlayerMovement()
+        {
+            if (PlayerMovement._runFaster)
+            {
+                PlayPlayerRunningSounds();
+            }
+            else
+            {
+                PlayPlayerWalkingSounds();
+            }
 
-    public void HandleGunShot()
-    {
-        PlayGunShotSound(); 
-        PlayGunReloadSound(); 
-    }
+            if(PlayerOneScript._runFaster)
+            {
+                PlayPlayerRunningSounds();
+            }
+            else
+            {
+                PlayPlayerWalkingSounds();
+            }
 
-    private void PlayGunShotSound()
-    {
-        gunSounds.PlayOneShot(gunShotSound);
-    }
+            if (TwoPlayerMovementScript._runFaster)
+            {
+                PlayPlayerRunningSounds();
+            }
+            else
+            {
+                PlayPlayerWalkingSounds();
+            }
+        }
 
-    private void PlayGunReloadSound()
-    {
-        gunSounds.PlayOneShot(gunReloadSound);
+        public void PlayPlayerRunningSounds()
+        {
+            if (playerRunningSounds.Length > 0)
+            {
+                AudioClip clip = playerRunningSounds[Random.Range(0, playerRunningSounds.Length)];
+                playerSounds.PlayOneShot(clip);
+            }
+        }
+
+        public void PlayPlayerWalkingSounds()
+        {
+            if (playerWalkingSounds.Length > 0)
+            {
+                AudioClip clip = playerWalkingSounds[Random.Range(0, playerWalkingSounds.Length)];
+                playerSounds.PlayOneShot(clip);
+            }
+        }
+
+        public void HandlePlayerDeath()
+        {
+            if (PlayerHealth._isDead)
+            {
+                PlayPlayerDeathSound();
+            }
+        }
+
+        public void HandleGunShot()
+        {
+            if (GunRayCasting._isShooting)
+            {
+                PlayGunShotSound();
+                PlayGunReloadSound();
+            }
+        }
+
+        private void PlayGunShotSound()
+        {
+            gunSounds.PlayOneShot(gunShotSound);
+        }
+
+        private void PlayGunReloadSound()
+        {
+            gunSounds.PlayOneShot(gunReloadSound);
+        }
     }
 }
-

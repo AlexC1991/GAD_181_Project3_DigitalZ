@@ -6,11 +6,11 @@ namespace AlexzanderCowell
     {
 
         [SerializeField] public static float _health = 50f;
-        private bool _isDead;
+        [SerializeField] public static bool _isDead;
         private Animator _animator;
         private bool takeDamage;
-        
-        
+
+
         private void Start()
         {
             _animator = GetComponent<Animator>();
@@ -47,6 +47,7 @@ namespace AlexzanderCowell
                 _isDead = true;
                 _animator.SetBool("isDead", true);
                 Destroy(gameObject, 3f);
+                
             }
         }
     }

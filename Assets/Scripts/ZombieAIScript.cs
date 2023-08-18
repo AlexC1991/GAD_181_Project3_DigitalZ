@@ -10,9 +10,9 @@ namespace AlexzanderCowell
         private NavMeshAgent _agent;
         private float zombieRunSpeed;
         private float zombieWalkSpeed;
-        [SerializeField] private float visionRadius = 10;
+        [SerializeField] public static float visionRadius = 10;
         [SerializeField] private float chaseRadius = 10;
-        [SerializeField] private float attackRadius = 2;
+        [SerializeField] public static float attackRadius = 2;
         private float _randomDistance;
         [SerializeField] private Animator animator;
         private void Start()
