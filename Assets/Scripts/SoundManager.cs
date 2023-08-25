@@ -38,7 +38,7 @@ namespace AlexzanderCowell
         void Start()
         {
             gameMusic = GetComponent<AudioSource>();
-            Invoke("PlayMusic", delayInSeconds);
+            Invoke("gameMusic", delayInSeconds);
         }
 
         void PlayMusic()
@@ -46,32 +46,32 @@ namespace AlexzanderCowell
             gameMusic.Play();
         }
 
-        public void PlayZombieAmbienceSound(Vector3 enemyPosition)
+        void PlayZombieAmbienceSound(Vector3 enemyPosition)
         {
             float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
             float maxAudibleDistance = 13f;
             float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
 
-            if (ZombieAIScript.visionRadius)
-            {
-                AudioClip clip = zombieAmbienceSounds[Random.Range(0, zombieAmbienceSounds.Length)];
-                zombieSounds.PlayOneShot(clip, volumeFactor);
-            }
+            //    if (ZombieAIScript.visionRadius)
+            //    {
+            //        AudioClip clip = zombieAmbienceSounds[Random.Range(0, zombieAmbienceSounds.Length)];
+            //        zombieSounds.PlayOneShot(clip, volumeFactor);
+            //    }
         }
 
-        public void PlayZombieAlert(Vector3 enemyPosition)
+        void PlayZombieAlert(Vector3 enemyPosition)
         {
             float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
             float maxAudibleDistance = 3f;
             float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
 
-            if (ZombieAIScript.attackRadius)
-            {
-                zombieSounds.PlayOneShot(zombieAlertSound, volumeFactor);
-            }
+            //    if (ZombieAIScript.attackRadius)
+            //    {
+            //        zombieSounds.PlayOneShot(zombieAlertSound, volumeFactor);
+            //    }
         }
 
-        public void PlayZombieDeathSound()
+        void PlayZombieDeathSound()
         {
             if (ZombieHealth._isDead)
             {
@@ -79,7 +79,7 @@ namespace AlexzanderCowell
             }
         }
 
-        public void HandlePlayerMovement()
+        void HandlePlayerMovement()
         {
             if (PlayerMovement._runFaster)
             {
@@ -90,7 +90,7 @@ namespace AlexzanderCowell
                 PlayPlayerWalkingSounds();
             }
 
-            if(PlayerOneScript._runFaster)
+            if (PlayerOneScript._runFaster)
             {
                 PlayPlayerRunningSounds();
             }
@@ -109,7 +109,7 @@ namespace AlexzanderCowell
             }
         }
 
-        public void PlayPlayerRunningSounds()
+        void PlayPlayerRunningSounds()
         {
             if (playerRunningSounds.Length > 0)
             {
@@ -118,7 +118,7 @@ namespace AlexzanderCowell
             }
         }
 
-        public void PlayPlayerWalkingSounds()
+        void PlayPlayerWalkingSounds()
         {
             if (playerWalkingSounds.Length > 0)
             {
@@ -127,15 +127,15 @@ namespace AlexzanderCowell
             }
         }
 
-        public void HandlePlayerDeath()
-        {
-            if (PlayerHealth._isDead)
-            {
-                PlayPlayerDeathSound();
-            }
-        }
+        //public void HandlePlayerDeath()
+        //{
+        //    if (PlayerHealth._isDead)
+        //    {
+        //        PlayPlayerDeathSound();
+        //    }
+        //}
 
-        public void HandleGunShot()
+        void HandleGunShot()
         {
             if (GunRayCasting._isShooting)
             {
@@ -144,12 +144,12 @@ namespace AlexzanderCowell
             }
         }
 
-        private void PlayGunShotSound()
+        void PlayGunShotSound()
         {
             gunSounds.PlayOneShot(gunShotSound);
         }
 
-        private void PlayGunReloadSound()
+        void PlayGunReloadSound()
         {
             gunSounds.PlayOneShot(gunReloadSound);
         }
