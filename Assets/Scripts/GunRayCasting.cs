@@ -7,11 +7,11 @@ namespace AlexzanderCowell
     {
         [Header("More Than One Player Controls")]
         
-        [SerializeField] private KeyCode shootGunKey;
+        /*[SerializeField] private KeyCode shootGunKey;*/
         private string xboxShootGunKey = "XboxFireC1";
 
-        [Header("Gun Characteristics")] [SerializeField]
-        public static float _damage = 10f;
+        [Header("Gun Characteristics")] 
+        [SerializeField] public static float _damage = 10f;
         [SerializeField] private ParticleSystem muzzleFlash;
 
         [Header("Raycast Properties")] [SerializeField]
@@ -47,13 +47,11 @@ namespace AlexzanderCowell
                 flashTimer -= 0.2f * Time.deltaTime;
             }
 
-            if (flashTimer == 0 || (flashTimer < 0.1f))
+            if (!_isShooting)
             {
                 muzzleFlash.Pause();
-                _isShooting = false;
                 muzzleFlash.Clear();
                 flashTimer = originalFlashTimer;
-
             }
 
             Debug.DrawLine(gunEnd.position, _hit.point, Color.red, 1.5f);
@@ -62,9 +60,9 @@ namespace AlexzanderCowell
 
         private void NormalControls()
         {
-            Debug.Log(Input.GetAxis(xboxShootGunKey));
+            Debug.Log(_isShooting);
             
-            if (Input.GetKeyDown(shootGunKey))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKeyUp(KeyCode.Mouse0))
             {
                 _isShooting = true;
             }
@@ -73,7 +71,7 @@ namespace AlexzanderCowell
             {
                 _isShooting = true;
             }
-            else if (Input.GetAxis(xboxShootGunKey) < 0.2)
+            else if (Input.GetAxis(xboxShootGunKey) < 0.2 && (Input.GetKeyUp(KeyCode.Mouse0) && !Input.GetKeyDown(KeyCode.Mouse0)))
             {
                 _isShooting = false;
             }
