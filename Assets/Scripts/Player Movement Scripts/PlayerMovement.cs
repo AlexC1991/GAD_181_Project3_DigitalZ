@@ -120,14 +120,25 @@ namespace AlexzanderCowell
           movement = transform.TransformDirection(movement) * walkSpeed; // Gives the character movement speed.
           _controller.Move((movement + _moveDirection) * Time.deltaTime); // Gets all the movement variables and moves the character.
           
+          /*if (_controller.transform.position.z > 0.2f)
+          {
+              SoundManager.playPlayerWalkingSound = true;
+          }
+          else 
+          {
+              SoundManager.playPlayerWalkingSound = false;
+          }*/
+          
           if (Input.GetKeyDown(KeyCode.LeftShift) || (Input.GetKeyDown(KeyCode.RightShift)) || Input.GetKeyDown(KeyCode.Joystick1Button8))
           {
               _runFaster = true;
+              SoundManager.playPlayerRunningSound = true;
           }
 
           if (Input.GetKeyUp(KeyCode.LeftShift) || (Input.GetKeyUp(KeyCode.RightShift)) || Input.GetKeyDown(KeyCode.Joystick1Button8))
           {
               _walkSpeedOnly = true;
+              SoundManager.playPlayerRunningSound = false;
           }
         }
 

@@ -44,6 +44,10 @@ namespace AlexzanderCowell
         {
             if (_health <= 0)
             {
+                SoundManager.playZombieAlertSound = false;
+                SoundManager.playZombieAmbienceSound = false;
+                SoundManager.playZombieDeathSound = true; 
+               
                 _isDead = true;
                 _animator.SetBool("isDead", true);
                 Destroy(gameObject, 3f);

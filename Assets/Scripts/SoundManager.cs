@@ -1,157 +1,141 @@
-using System.Collections;
 using UnityEngine;
 
 namespace AlexzanderCowell
 {
     public class SoundManager : MonoBehaviour
     {
-        private AudioSource playerSounds;
-        private AudioSource gunSounds;
-        private AudioSource zombieSounds;
+        [SerializeField] private AudioClip[] playerWalkingSounds;
+        [SerializeField] private AudioClip[] playerRunningSounds;
+        [SerializeField] private AudioClip playerDeathSound; //played upon players health reaching 0.
 
-        private AudioClip[] playerWalkingSounds;
-        private AudioClip[] playerRunningSounds;
-        private AudioClip playerDeathSound; //played upon players health reaching 0.
+        [SerializeField] private AudioClip gunShotSound;
+        [SerializeField] private AudioClip gunReloadSound; //played after gunshot sound.
 
-        private AudioClip gunShotSound;
-        private AudioClip gunReloadSound; //played after gunshot sound.
+        [SerializeField] private AudioClip[] zombieAmbienceSounds; //starts at radius 13, increase in volume till loudest at 1.
+        [SerializeField] private AudioClip zombieDeathSound; //upon zombie health reaching 0. 
+        [SerializeField] private AudioClip zombieAlertSound; //starts at radius 3.
+        
+        private float playingTime;
 
-        private AudioClip[] zombieAmbienceSounds; //starts at radius 13, increase in volume till loudest at 1.
-        private AudioClip zombieDeathSound; //upon zombie health reaching 0. 
-        private AudioClip zombieAlertSound; //starts at radius 3.
+        public static AudioSource gameMusic; //plays game music.
 
-        private AudioSource gameMusic; //plays game music.
-        private float delayInSeconds = 0.5f; //initiates delay. Intended for use with gameMusic.
-
-        private Transform _controller;
-        public static SoundManager instance;
-
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-        }
+        public static bool playGunSound;
+        public static bool playReloadSound;
+        public static bool playPlayerWalkingSound;
+        public static bool playPlayerRunningSound;
+        public static bool playZombieAmbienceSound;
+        public static bool playZombieAlertSound;
+        public static bool playZombieDeathSound;
+        public static bool playPlayerDeathSound;
 
         void Start()
         {
             gameMusic = GetComponent<AudioSource>();
-            Invoke("gameMusic", delayInSeconds);
+            playingTime = 1;
         }
 
-        void PlayMusic()
+        private void Update()
         {
-            gameMusic.Play();
+            Debug.Log(playingTime);
+            
+            if (playGunSound)
+            {
+                gameMusic.PlayOneShot(gunShotSound);
+                playGunSound = false;
+            }
+
+            if (playReloadSound)
+            {
+                PlayGunReloadSound();
+                playReloadSound = false;
+            }
+
+            if (playPlayerWalkingSound)
+            {
+                PlayerWalkingSounds();
+                playPlayerWalkingSound = false;
+            }
+
+            if (playPlayerRunningSound)
+            {
+                PlayPlayerRunningSounds();
+                playPlayerRunningSound = false;
+            }
+
+            if (playZombieAmbienceSound)
+            {
+                PlayZombieAmbienceSound();
+                playZombieAmbienceSound = false;
+            }
+
+            if (playZombieAlertSound)
+            {
+                PlayZombieAlert();
+                playZombieAlertSound = false;
+            }
+
+            if (playZombieDeathSound)
+            {
+                PlayZombieDeathSound();
+                playZombieDeathSound = false;
+            }
+
+            if (playPlayerDeathSound)
+            {
+                HandlePlayerDeath();
+                playPlayerDeathSound = false;
+            }
         }
 
-        void PlayZombieAmbienceSound(Vector3 enemyPosition)
+        private void PlayZombieAmbienceSound()
         {
-            float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
+            float distanceToEnemy = Vector3.Distance(ZombieAIScript.zombieTransform.position, PlayerMovement._controller.transform.position);
             float maxAudibleDistance = 13f;
             float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
-
-            //    if (ZombieAIScript.visionRadius)
-            //    {
-            //        AudioClip clip = zombieAmbienceSounds[Random.Range(0, zombieAmbienceSounds.Length)];
-            //        zombieSounds.PlayOneShot(clip, volumeFactor);
-            //    }
+                  
+            AudioClip clip = zombieAmbienceSounds[Random.Range(0, zombieAmbienceSounds.Length)];
+            gameMusic.PlayOneShot(clip, volumeFactor);
         }
 
-        void PlayZombieAlert(Vector3 enemyPosition)
+        private void PlayZombieAlert()
         {
-            float distanceToEnemy = Vector3.Distance(enemyPosition, _controller.position);
+            float distanceToEnemy = Vector3.Distance(ZombieAIScript.zombieTransform.position, PlayerMovement._controller.transform.position);
             float maxAudibleDistance = 3f;
             float volumeFactor = 1f - Mathf.Clamp01(distanceToEnemy / maxAudibleDistance);
-
-            //    if (ZombieAIScript.attackRadius)
-            //    {
-            //        zombieSounds.PlayOneShot(zombieAlertSound, volumeFactor);
-            //    }
+            
+            gameMusic.PlayOneShot(zombieAlertSound, volumeFactor);
         }
 
-        void PlayZombieDeathSound()
+        private void PlayZombieDeathSound()
         {
-            if (ZombieHealth._isDead)
-            {
-                zombieSounds.PlayOneShot(zombieDeathSound);
-            }
+                gameMusic.PlayOneShot(zombieDeathSound);
         }
 
-        void HandlePlayerMovement()
+        private void PlayerWalkingSounds()
         {
-            if (PlayerMovement._runFaster)
-            {
-                PlayPlayerRunningSounds();
-            }
-            else
-            {
-                PlayPlayerWalkingSounds();
-            }
-
-            if (PlayerOneScript._runFaster)
-            {
-                PlayPlayerRunningSounds();
-            }
-            else
-            {
-                PlayPlayerWalkingSounds();
-            }
-
-            if (TwoPlayerMovementScript._runFaster)
-            {
-                PlayPlayerRunningSounds();
-            }
-            else
-            {
-                PlayPlayerWalkingSounds();
-            }
-        }
-
-        void PlayPlayerRunningSounds()
-        {
-            if (playerRunningSounds.Length > 0)
-            {
-                AudioClip clip = playerRunningSounds[Random.Range(0, playerRunningSounds.Length)];
-                playerSounds.PlayOneShot(clip);
-            }
-        }
-
-        void PlayPlayerWalkingSounds()
-        {
-            if (playerWalkingSounds.Length > 0)
-            {
                 AudioClip clip = playerWalkingSounds[Random.Range(0, playerWalkingSounds.Length)];
-                playerSounds.PlayOneShot(clip);
-            }
+                gameMusic.PlayOneShot(clip);
         }
 
-        //public void HandlePlayerDeath()
-        //{
-        //    if (PlayerHealth._isDead)
-        //    {
-        //        PlayPlayerDeathSound();
-        //    }
-        //}
-
-        void HandleGunShot()
+        private void PlayPlayerRunningSounds()
         {
-            if (GunRayCasting._isShooting)
-            {
-                PlayGunShotSound();
-                PlayGunReloadSound();
-            }
+                AudioClip clip = playerRunningSounds[Random.Range(0, playerRunningSounds.Length)];
+                gameMusic.PlayOneShot(clip);
         }
 
-        void PlayGunShotSound()
+        private void HandlePlayerDeath()
         {
-            gunSounds.PlayOneShot(gunShotSound);
+                gameMusic.PlayOneShot(playerDeathSound);
         }
 
-        void PlayGunReloadSound()
+        private void PlayGunShotSound()
         {
-            gunSounds.PlayOneShot(gunReloadSound);
+            
+        }
+
+        private void PlayGunReloadSound()
+        {
+            gameMusic.PlayOneShot(gunReloadSound);
         }
     }
 }

@@ -42,6 +42,7 @@ namespace AlexzanderCowell
             
             if (_isShooting)
             {
+                SoundManager.playGunSound = true;
                 muzzleFlash.Play();
                 ShootGun();
                 flashTimer -= 0.2f * Time.deltaTime;

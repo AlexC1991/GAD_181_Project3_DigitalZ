@@ -15,6 +15,7 @@ namespace AlexzanderCowell
         [SerializeField] public static float attackRadius = 2;
         private float _randomDistance;
         [SerializeField] private Animator animator;
+        public static Transform zombieTransform;
         private void Start()
         {
             _agent = GetComponent<NavMeshAgent>();
@@ -28,7 +29,7 @@ namespace AlexzanderCowell
         private void Update()
         {
             // Make zombie move around the map using nav mesh & walk speed than changes direction after 1 min of walking in one direction.
-            
+            zombieTransform = transform;
             if ((Vector3.Distance(transform.position, PlayerMovement._controller.transform.position) > chaseRadius &&
                  Vector3.Distance(transform.position, PlayerMovement._controller.transform.position) > attackRadius))
             {
@@ -61,6 +62,10 @@ namespace AlexzanderCowell
             // If the zombie is with in the attack radius of the player, the zombie will stop moving and attack the player.
             if (Vector3.Distance(transform.position, PlayerMovement._controller.transform.position) < attackRadius)
             {
+                SoundManager.playZombieAlertSound = true;
+                SoundManager.playZombieAmbienceSound = false;
+                SoundManager.playZombieDeathSound = false; 
+                
                 animator.SetBool("AttackPlayer", true);
                 animator.SetBool("SeePlayer", false);
                 _agent.speed = 0;
@@ -68,12 +73,20 @@ namespace AlexzanderCowell
             }
             else if (Vector3.Distance(transform.position, PlayerMovement._controller.transform.position) > attackRadius && Vector3.Distance(transform.position, PlayerMovement._controller.transform.position) < chaseRadius)
             {
+                SoundManager.playZombieAlertSound = false;
+                SoundManager.playZombieAmbienceSound = true;
+                SoundManager.playZombieDeathSound = false; 
+                
                 animator.SetBool("AttackPlayer", false);
                 animator.SetBool("SeePlayer", true);
             }
 
             if (Vector3.Distance(transform.position, PlayerMovement._controller.transform.position) < visionRadius)
             {
+                SoundManager.playZombieAlertSound = false;
+                SoundManager.playZombieAmbienceSound = true;
+                SoundManager.playZombieDeathSound = false; 
+                
                 transform.LookAt(PlayerMovement._controller.transform.position);
             }
         }
